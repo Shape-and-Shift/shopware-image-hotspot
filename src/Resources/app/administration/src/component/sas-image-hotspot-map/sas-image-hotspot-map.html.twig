@@ -1,0 +1,89 @@
+{% block sas_image_hotspot_map_wrapper %}
+    <sw-container gap="0px 30px" columns="1fr" v-if="map">
+        {% block sas_image_hotspot_map_input_fields %}
+        <sw-modal v-if="!isLoading && showHotspotModal"
+                  :isLoading="isLoading"
+                  @modal-close="onPinModalClosed"
+                  :title="$tc('sas-image-hotspot-map.fields.modalTitle')">
+
+            <sw-container gap="20px" columns="1fr 1fr" class="sas-image-hotspot-map-fields" v-if="selectedPin">
+                <slot name="title-field">
+                    {% block sas_image_hotspot_map_title_field %}
+                        <sw-text-field size="small" :label="$tc('sas-image-hotspot-map.fields.title')" v-model="selectedPin.title" />
+                    {% endblock %}
+                </slot>
+
+                <slot name="image-field">
+                    {% block sas_image_hotspot_map_image_field %}
+                        <sw-media-compact-upload-v2
+                            :source="selectedPin.mediaId"
+                            :uploadTag="uploadTag"
+                            :label="$tc('sas-image-hotspot-map.fields.image')"
+                            defaultFolder="Hotspot Images"
+                            :allowMultiSelect="false"
+                            @media-upload-remove-image="removeMedia"
+                            @selection-change="onSetHotspotMedia">
+                        </sw-media-compact-upload-v2>
+                        <sw-upload-listener
+                            :uploadTag="uploadTag"
+                            autoUpload
+                            @media-upload-finish="successfulUpload">
+                        </sw-upload-listener>
+                    {% endblock %}
+                </slot>
+
+            </sw-container>
+
+            <sw-container gap="20px 20px" columns="1fr 1fr" class="sas-image-hotspot-map-fields" v-if="selectedPin">
+                <slot name="link-field">
+                    {% block sas_image_hotspot_map_link_field %}
+                        <sw-text-field size="small" :label="$tc('sas-image-hotspot-map.fields.link')" v-model="selectedPin.link" />
+                    {% endblock %}
+                </slot>
+
+                <slot name="open-new-tab-field">
+                    {% block sas_image_hotspot_map_open_new_tab_field %}
+                        <sw-switch-field :label="$tc('sas-image-hotspot-map.fields.openNewTab')" v-model="selectedPin.openNewTab" />
+                    {% endblock %}
+                </slot>
+
+            </sw-container>
+
+            <slot name="description-field">
+                {% block sas_image_hotspot_map_description_field %}
+                    <sw-text-editor size="medium" required :label="$tc('sas-image-hotspot-map.fields.description')" v-model="selectedPin.description" />
+                {% endblock %}
+            </slot>
+
+            <template #modal-footer>
+                <slot name="delete-modal-footer">
+                    <slot name="delete-modal-cancel">
+                        <sw-button @click="onSaveDot" size="small">
+                            {{ $tc('global.default.apply') }}
+                        </sw-button>
+                    </slot>
+
+                    <slot name="delete-modal-delete-item">
+                        <sw-button @click="onDeleteDot" variant="danger" size="small">
+                            {{ $tc('global.default.delete') }}
+                        </sw-button>
+                    </slot>
+                </slot>
+            </template>
+        </sw-modal>
+        {% endblock %}
+
+        {% block sas_image_hotspot_map_image %}
+            <div class="sas-image-hotspot-map-container">
+                <div class="sas-image-hotspot-map-wrapper" ref="pinMapImageWrapper">
+                    <img class="sas-image-hotspot-map" @click="onImageClick" :src="map.media.url" ref="pinMapImage"/>
+                    <sas-image-hotspot v-for="(hotspot, index) in map.hotspots"
+                                 :key="hotspot.id" :hotspot="hotspot"
+                                 :isActive="selectedPin && hotspot.id === selectedPin.id"
+                                 @on-dragging-end="onDraggingEnd"
+                                 @on-dot-click="onDotClick"/>
+                </div>
+            </div>
+        {% endblock %}
+    </sw-container>
+{% endblock %}

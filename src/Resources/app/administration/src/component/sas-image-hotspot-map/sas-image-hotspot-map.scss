@@ -1,0 +1,116 @@
+.sas-image-hotspot-map-fields {
+    margin-bottom: 30px;
+
+    .sas-image-hotspot-map-field-actions {
+        place-self: end;
+        margin-bottom: 10px;
+    }
+
+    place-items: end stretch;
+}
+
+.sas-image-hotspot-map-wrapper {
+    position: relative;
+    display: inline-block;
+
+    img {
+        max-width: 100%;
+    }
+
+    .hotspot-grid-card.sw-card  {
+        .sw-card__content {
+            padding: 0;
+        }
+    }
+
+    .dot {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: rgba(red, 1);
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, .2);
+        line-height: 13px;
+        font-size: 10px;
+        font-weight: bold;
+        transition: box-shadow .214s ease-in-out, transform .214s ease-in-out, background .214s ease-in-out;
+        text-align: center;
+
+        &:before, &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        &.is-active:before {
+            z-index: 3;
+            opacity: 1;
+            transform: scale(1.5);
+            border-color: red;
+        }
+
+        &:hover:before {
+            opacity: 1;
+            transform: scale(1.4);
+            animation: borderColor 2s linear infinite;
+        }
+
+        &:hover:after {
+            display:none;
+        }
+
+        &:before {
+            z-index: 1;
+            border: 0.15em solid rgba(255, 255, 255, 0.9);
+            opacity: 0;
+            transform: scale(2);
+            transition: transform .25s, opacity .2s;
+            left: calc(50% - 6px);
+            top: calc(50% - 6px);
+            box-sizing: border-box;
+        }
+
+        &:after {
+            z-index: 2;
+            border: 2px solid #fff;
+            animation: wave 2s infinite;
+            left: calc(-50% + 4px);
+            top: calc(-50% + 4px);
+        }
+
+        &.ui-draggable-dragging {
+            box-shadow: 0 0 25px 0 rgba(0, 0, 0, .5);
+            transform: scale3d(1.4, 1.4, 1.4);
+            background: rgba(red, .7);
+        }
+    }
+}
+
+@keyframes wave{
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+@keyframes borderColor{
+    0% {
+        border-color: #fff;
+    }
+    50% {
+        border-color: red;
+    }
+    100% {
+        border-color: #fff;
+    }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="SasImageHotspot\Content\ImageHotspotMap\ImageHotspotMapDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="SasImageHotspot\Content\ImageHotspotMap\ImageHotspotMapTranslation\ImageHotspotMapTranslationDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="SasImageHotspot\Content\ImageHotspot\ImageHotspotDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="SasImageHotspot\Content\ImageHotspot\ImageHotspotTranslation\ImageHotspotTranslationDefinition">
+            <tag name="shopware.entity.definition"/>
+        </service>
+
+        <service id="SasImageHotspot\Content\Extension\MediaEntityExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="SasImageHotspot\TwigExtension\CustomThumbnailExtension" decorates="Shopware\Storefront\Framework\Twig\ThumbnailExtension" />
+
+        <service id="SasImageHotspot\Subscriber\GenericPageLoadedEventSubscriber">
+            <argument type="service" id="sas_image_hotspot_map.repository" />
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+    </services>
+</container>

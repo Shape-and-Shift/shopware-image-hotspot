@@ -1,0 +1,18 @@
+{
+    "sas-image-hotspot-map": {
+        "general": {
+            "title": "Bild-Hotspot-Karte",
+            "description": "Beschreibung",
+            "setHotspot": "Stellen Sie den Image-Hotspot ein"
+        },
+        "fields": {
+            "title": "Titel",
+            "image": "Bild",
+            "link": "Verknüpfung",
+            "openNewTab": "Link in neuem Tab öffnen",
+            "modalTitle": "Hotspot-Detail",
+            "description": "Beschreibung",
+            "product": "Kartiertes Produkt"
+        }
+    }
+}

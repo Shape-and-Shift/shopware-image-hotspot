@@ -1,0 +1,31 @@
+<div class="sas-image-hotspot__desc">
+    {% if hotspot.media.url %}
+        {% set attributes = {
+            'class': 'sas-image-hotspot__desc-image',
+            'alt': (hotspot.media.translated.alt ?: ''),
+            'title': (hotspot.media.translated.title ?: ''),
+            'data-object-fit': 'contain'
+        } %}
+
+        {% sw_thumbnails 'sas-image-hotspot__desc-image' with {
+            media: hotspot.media
+        }%}
+    {% endif %}
+
+    <div class="sas-image-hotspot__desc-text">
+        {% if hotspot.translated.title %}
+            <h4>
+                {% if hotspot.translated.link %}
+                    <a {% if hotspot.translated.openNewTab %}target="_blank"{% endif %} href="{{ hotspot.translated.link }}">
+                {% endif %}
+                    {{ hotspot.translated.title|raw|striptags|sw_sanitize }}
+                {% if hotspot.translated.link %}
+                    </a>
+                {% endif %}
+            </h4>
+        {% endif %}
+        {% if hotspot.translated.description %}
+            <div class="sas-image-hotspot__desc-p">{{ hotspot.translated.description|raw }}</div>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{% block sas_image_hot_spot_modal_inner %}
+    <sw-modal :isLoading="isLoading || isSaving" v-if="media.id && showHotspotModal" variant="large" :title="$tc('sas-image-hotspot-map.general.title')" @modal-close="onCloseHotspotModal">
+        <sw-container>
+            <sas-image-hotspot-map v-if="map" :map="map" />
+        </sw-container>
+        <template #modal-footer>
+            <sw-button
+                :disabled="isLoading || isSaving"
+                :isLoading="isLoading || isSaving"
+                class="sas-hotspot-map-modal__save"
+                @click="onClickSave"
+                size="small"
+                variant="primary">
+                {{ $tc('global.default.save') }}
+            </sw-button>
+
+            <sw-button @click="onCloseHotspotModal" size="small">
+                {{ $tc('global.default.cancel') }}
+            </sw-button>
+        </template>
+    </sw-modal>
+{% endblock %}

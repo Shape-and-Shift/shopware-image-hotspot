@@ -1,0 +1,77 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-image-gallery.html.twig' %}
+
+{% block element_image_gallery_inner_item %}
+    <div class="gallery-slider-item-container">
+        <div class="gallery-slider-item is-{{ displayMode }} js-magnifier-container"{% if minHeight and  (displayMode == "cover" or displayMode == "contain" ) %} style="min-height: {{ minHeight }}"{% endif %}>
+            {% set attributes = {
+                'class': 'img-fluid gallery-slider-image magnifier-image js-magnifier-image',
+                'alt': (image.translated.alt ?: fallbackImageTitle),
+                'title': (image.translated.title ?: fallbackImageTitle),
+                'data-full-image': image.url
+            } %}
+
+            {% if displayMode == 'cover' or displayMode == 'contain' %}
+                {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+            {% endif %}
+
+            {% if isProduct %}
+                {% set attributes = attributes|merge({ 'itemprop': 'image' }) %}
+            {% endif %}
+
+            {% block sas_image_hotspot_element_image_gallery_inner_item_image %}
+                {% sw_thumbnails 'gallery-slider-image-thumbnails' with {
+                    media: image,
+                    hotspotEnabled: true,
+                } %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block element_image_gallery_inner_single %}
+    <div class="gallery-slider-single-image is-{{ displayMode }} js-magnifier-container"{% if minHeight %} style="min-height: {{ minHeight }}"{% endif %}>
+        {% if imageCount > 0 %}
+            {% set attributes = {
+                'class': 'img-fluid gallery-slider-image magnifier-image js-magnifier-image',
+                'alt': (mediaItems|first.translated.alt ?: fallbackImageTitle),
+                'title': (mediaItems|first.translated.title ?: fallbackImageTitle),
+                'data-full-image': mediaItems|first.url
+            } %}
+
+            {% if displayMode == 'cover' or displayMode == 'contain' %}
+                {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
+            {% endif %}
+
+            {% if isProduct %}
+                {% set attributes = attributes|merge({ 'itemprop': 'image' }) %}
+            {% endif %}
+
+            {% block sas_image_hotspot_element_image_gallery_inner_single_image %}
+                {% sw_thumbnails 'gallery-slider-image-thumbnails' with {
+                    media: mediaItems|first,
+                    hotspotEnabled: true,
+                } %}
+            {% endblock %}
+        {% else %}
+            {% sw_icon 'placeholder' style {
+                'size': 'fluid'
+            } %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block element_image_gallery_inner_zoom_modal_slider_item_image %}
+    {% block sas_image_hotspot_element_image_gallery_inner_zoom_modal_slider_item_image %}
+        {% sw_thumbnails 'gallery-slider-image-thumbnails' with {
+            media: image,
+            hotspotEnabled: true,
+            attributes: {
+                'class': 'gallery-slider-image js-image-zoom-element js-load-img',
+                'alt': (image.translated.alt ?: fallbackImageTitle),
+                'title': (image.translated.title ?: fallbackImageTitle)
+            },
+            load: true
+        } %}
+    {% endblock %}
+{% endblock %}
+

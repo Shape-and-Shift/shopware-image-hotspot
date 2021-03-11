@@ -1,0 +1,32 @@
+{
+    "name": "sas/image-hotspot",
+    "description": "Image Hotspot Plugin for Shopware 6",
+    "type": "shopware-platform-plugin",
+    "version":"1.0.0",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SasImageHotspot\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "SasImageHotspot\\SasImageHotspot",
+        "label": {
+            "de-DE": "Image Hotspot Plugin for Shopware 6",
+            "en-GB": "Image Hotspot Plugin for Shopware 6"
+        },
+        "plugin-icon":"src/Resources/config/plugin.png",
+        "description":{
+            "de-DE":"Image Hotspot Plugin for Shopware 6",
+            "en-GB":"Image Hotspot Plugin for Shopware 6"
+        },
+        "manufacturerLink":{
+            "de-DE":"https://shapeandshift.dev",
+            "en-GB":"https://shapeandshift.dev"
+        },
+        "supportLink":{
+            "de-DE":"https://shapeandshift.dev",
+            "en-GB":"https://shapeandshift.dev"
+        }
+    }
+}

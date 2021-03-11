@@ -1,0 +1,38 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-image-slider.html.twig' %}
+
+{% block element_image_slider_inner %}
+    <div class="image-slider-container"
+         data-base-slider-container="true">
+        {% for image in element.data.sliderItems %}
+
+            {% set imageElement %}
+                <div class="image-slider-item{% if loop.first != true %} is-not-first{% endif %} is-{{ sliderConfig.displayMode.value }}"{% if sliderConfig.minHeight.value and  sliderConfig.displayMode.value == "cover" %} style="min-height: {{ sliderConfig.minHeight.value }}"{% endif %}>
+                    {% set attributes = {
+                        'class': 'img-fluid image-slider-image',
+                        'alt': (image.media.translated.alt ?: ''),
+                        'title': (image.media.translated.title ?: '')
+                    } %}
+
+                    {% if element.config.displayMode.value == 'cover' or element.config.displayMode.value == 'contain' %}
+                        {% set attributes = attributes|merge({ 'data-object-fit': element.config.displayMode.value }) %}
+                    {% endif %}
+
+                    {% block sas_image_hotspot_element_image_slider_inner_image %}
+                        {% sw_thumbnails 'cms-image-slider-thumbnails' with {
+                            media: image.media,
+                            hotspotEnabled: true
+                        } %}
+                    {% endblock %}
+                </div>
+            {% endset %}
+
+            {% block element_image_slider_inner_item %}
+                {{ parent() }}
+            {% endblock %}
+        {% endfor %}
+    </div>
+
+    {% block element_image_slider_controls %}
+        {{ parent() }}
+    {% endblock %}
+{% endblock %}

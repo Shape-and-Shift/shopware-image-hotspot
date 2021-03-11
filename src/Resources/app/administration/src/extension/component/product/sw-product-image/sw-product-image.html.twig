@@ -1,0 +1,43 @@
+{% block sw_product_image_preview %}
+    <sw-media-preview-v2 class="sw-product-image__image"
+                         v-if="media"
+                         :source="media"
+                         :hideTooltip="false">
+    </sw-media-preview-v2>
+    <sw-media-preview-v2 class="sw-product-image__image"
+                         v-else
+                         :source="mediaId"
+                         :hideTooltip="false">
+    </sw-media-preview-v2>
+    <sw-label
+        v-if="isCover"
+        class="sw-product-image__cover-label"
+        variant="primary"
+        size="medium"
+        appearance="pill">
+        {{ $tc('sw-product.mediaForm.coverSubline') }}
+    </sw-label>
+{% endblock %}
+
+{% block sw_product_image_context %}
+    {% block sw_product_image_context_set_hotspot %}
+        <sw-context-menu-item
+            v-if="media && media.mediaType && media.mediaType.name === 'IMAGE'"
+            @click="onShowHotspotModal">
+            {{ $tc('sas-image-hotspot-map.general.setHotspot') }}
+        </sw-context-menu-item>
+
+    {% parent %}
+
+    {% endblock %}
+{% endblock %}
+
+{% block sw_product_image_preview %}
+    {% parent %}
+    {% block sw_product_image_hotspot_modal %}
+        <sas-image-hotspot-modal
+            v-if="showHotspotModal && media && media.id"
+            :media="media"
+            @on-close-hotspot-modal="onCloseHotspotModal" />
+    {% endblock %}
+{% endblock %}

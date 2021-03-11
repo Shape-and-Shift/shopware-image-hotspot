@@ -1,0 +1,18 @@
+{
+    "sas-image-hotspot-map": {
+        "general": {
+            "title": "Image hotspot map",
+            "description": "Description",
+            "setHotspot": "Set Image Hotspot"
+        },
+        "fields": {
+            "title": "Title",
+            "image": "Image",
+            "link": "Link",
+            "openNewTab": "Open link in new tab",
+            "modalTitle": "Hotspot detail",
+            "description": "Description",
+            "product": "Mapped product"
+        }
+    }
+}

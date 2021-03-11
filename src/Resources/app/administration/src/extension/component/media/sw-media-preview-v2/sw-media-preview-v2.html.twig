@@ -1,0 +1,17 @@
+{% block sw_media_preview_v2_file_type_image %}
+    {% parent %}
+
+    {% block sas_image_hot_spot_dot %}
+        <div class="sas-hotspot-map-wrapper" v-if="trueSource.id && trueSource.extensions.hotspotMap">
+            <div class="dot" @click="onShowHotspotModal"></div>
+        </div>
+    {% endblock %}
+
+    {% block sas_image_hot_spot_modal %}
+        <sas-image-hotspot-modal
+            v-if="showHotspotModal && trueSource.id"
+            :media="trueSource"
+            @on-close-hotspot-modal="onCloseHotspotModal" />
+    {% endblock %}
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% block sas_image_hotspot_wrapper %}
+    <div @click="onDotClick" :style="styleObject" :class="{ 'is-active': isActive, dot: true, 'sas-image-hotspot': true }" :ref="'pin_' + hotspot.id">
+        <div class="sas-image-hotspot__desc" v-if="hotspot.translated">
+            <img v-if="hotspot.media && hotspot.media.url" class="sas-image-hotspot__desc-image" :src="hotspot.media.url" />
+            <div class="sas-image-hotspot__desc-text">
+                <h4 v-if="hotspot.translated && hotspot.translated.title">{{ hotspot.translated.title }}</h4>
+                <div v-if="hotspot.translated.description" class="sas-image-hotspot__desc-p" v-html="hotspot.translated.description"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
