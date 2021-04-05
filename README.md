@@ -1,3 +1,7 @@
+### Short video introduction
+
+<a href="https://www.loom.com/share/905f5e551f6d4ea8a150b92294bf70cc" target="_blank"><img width="818" alt="Bildschirmfoto 2021-04-05 um 10 35 50" src="https://user-images.githubusercontent.com/8193345/113549820-bbcbf280-95fa-11eb-834b-1121f1df9be4.png"></a>
+
 ### How to show a custom media field with a Hotspot
 It is also possible to show the image hotspots on a media type
 which was generated through a custom field.
